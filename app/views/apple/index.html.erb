@@ -1,0 +1,27 @@
+<h1>Apple#index</h1>
+
+<% flash.each do |key, value| %>
+  <%= content_tag :div, value, class: "flash #{key}" %>
+<% end %>
+
+<%= form_tag(apple_index_path, method: :post) do %>
+  <div>
+    <%= label_tag :cert, "Pem encoded certificate" %>
+    <%= text_area_tag :cert %>
+  </div>
+  <div>
+    <%= label_tag :sandbox_mode, "Sandbox mode?" %>
+    <%= check_box_tag :sandbox_mode %>
+  </div>
+  <div>
+    <%= label_tag :destination, "Destination Token" %>
+    <%= text_field_tag :destination %>
+  </div>
+  <div>
+    <%= label_tag :message, "Message" %>
+    <%= text_field_tag :message %>
+  </div>
+  <div>
+    <%= submit_tag "Push!" %>
+  </div>
+<% end %>

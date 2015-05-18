@@ -1,0 +1,2 @@
+module AppleHelper
+end
