@@ -3,7 +3,7 @@ class AndroidController < ApplicationController
   end
 
   def create
-    app = Rpn::GCMApp.new
+    app = RailsPushNotifications::GCMApp.new
     app.gcm_key = params[:gcm_api_key]
     app.save
 
@@ -17,7 +17,7 @@ class AndroidController < ApplicationController
         app.push_notifications
         notif.reload
         flash[:notice] = "Notification successfully pushed through!. Results #{notif.results.success} succeded, #{notif.results.failed} failed"
-        redirect_to :apple_index
+        redirect_to :android_index
       else
         flash.now[:error] = notif.errors.full_messages
         render :index
