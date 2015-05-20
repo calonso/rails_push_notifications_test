@@ -6,9 +6,7 @@
 <%= "#{so_far.reduce(&:+)} Notifications sent so far: #{so_far[0]} suceeded, #{so_far[1]} failed" %></p>
 </div>
 
-<% flash.each do |key, value| %>
-  <%= content_tag :div, value, class: "flash #{key}" %>
-<% end %>
+<%= render 'shared/flash' %>
 
 <%= form_tag(apple_index_path, method: :post) do %>
   <div>
