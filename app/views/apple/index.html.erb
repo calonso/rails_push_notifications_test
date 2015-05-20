@@ -1,4 +1,4 @@
-<h1>Apple#index</h1>
+<h1>Apple Push Notifications</h1>
 
 <% flash.each do |key, value| %>
   <%= content_tag :div, value, class: "flash #{key}" %>
@@ -25,3 +25,9 @@
     <%= submit_tag "Push!" %>
   </div>
 <% end %>
+
+<div>
+<% so_far = RailsPushNotifications::APNSApp.includes(:notifications).map(&:notifications).flatten.reduce([0, 0]) { |res, notif| [res[0] + notif.success, res[1] + notif.failed] } %>
+<p>
+<%= "#{so_far.reduce(&:+)} Notifications sent so far: #{so_far[0]} suceeded, #{so_far[1]} failed" %></p>
+</div>

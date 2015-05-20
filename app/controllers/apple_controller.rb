@@ -6,7 +6,7 @@ class AppleController < ApplicationController
     app = RailsPushNotifications::APNSApp.new
     app.apns_dev_cert = params[:cert]
     app.apns_prod_cert = params[:cert]
-    app.sandbox_mode = params[:sandbox_mode]
+    app.sandbox_mode = !!params[:sandbox_mode]
 
     if app.save
       notif = app.notifications.build(
@@ -17,13 +17,14 @@ class AppleController < ApplicationController
       if notif.save
         app.push_notifications
         notif.reload
-        flash[:notice] = notif.results.inspect
+        flash.now[:notice] = "Notification successfully pushed through!. Results #{notif.results.success} succeded, #{notif.results.failed} failed"
       else
-        flash[:error] = notif.errors.full_messages
+        flash.now[:error] = notif.errors.full_messages
       end
     else
-      flash[:error] = app.errors.full_messages
+      flash.now[:error] = app.errors.full_messages
     end
+
     render :index
   end
 end
