@@ -1,14 +1,16 @@
 <h1>Apple Push Notifications</h1>
 
+<div>
+<% so_far = RailsPushNotifications::APNSApp.includes(:notifications).map(&:notifications).flatten.reduce([0, 0]) { |res, notif| [res[0] + notif.success, res[1] + notif.failed] } %>
+<p>
+<%= "#{so_far.reduce(&:+)} Notifications sent so far: #{so_far[0]} suceeded, #{so_far[1]} failed" %></p>
+</div>
+
 <% flash.each do |key, value| %>
   <%= content_tag :div, value, class: "flash #{key}" %>
 <% end %>
 
 <%= form_tag(apple_index_path, method: :post) do %>
-  <div>
-    <%= label_tag :cert, "Pem encoded certificate" %>
-    <%= text_area_tag :cert %>
-  </div>
   <div>
     <%= label_tag :sandbox_mode, "Sandbox mode?" %>
     <%= check_box_tag :sandbox_mode %>
@@ -22,12 +24,11 @@
     <%= text_field_tag :message %>
   </div>
   <div>
+    <%= label_tag :cert, "Pem encoded certificate" %>
+    <%= text_area_tag :cert %>
+  </div>
+  <div>
     <%= submit_tag "Push!" %>
   </div>
 <% end %>
 
-<div>
-<% so_far = RailsPushNotifications::APNSApp.includes(:notifications).map(&:notifications).flatten.reduce([0, 0]) { |res, notif| [res[0] + notif.success, res[1] + notif.failed] } %>
-<p>
-<%= "#{so_far.reduce(&:+)} Notifications sent so far: #{so_far[0]} suceeded, #{so_far[1]} failed" %></p>
-</div>

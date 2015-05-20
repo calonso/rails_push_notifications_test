@@ -17,14 +17,15 @@ class AppleController < ApplicationController
       if notif.save
         app.push_notifications
         notif.reload
-        flash.now[:notice] = "Notification successfully pushed through!. Results #{notif.results.success} succeded, #{notif.results.failed} failed"
+        flash[:notice] = "Notification successfully pushed through!. Results #{notif.results.success} succeded, #{notif.results.failed} failed"
+        redirect_to :apple_index
       else
         flash.now[:error] = notif.errors.full_messages
+        render :index
       end
     else
       flash.now[:error] = app.errors.full_messages
+      render :index
     end
-
-    render :index
   end
 end
