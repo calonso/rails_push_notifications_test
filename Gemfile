@@ -23,7 +23,7 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-gem 'rails-push-notifications', path: '/Users/calonso/dev/rails-push-notifications' # github: 'calonso/rails-push-notifications', branch: 'full_rearchitect'
+gem 'rails-push-notifications', '~> 0.2', github: 'calonso/rails-push-notifications'
 
 gem 'blueprint-rails'
 

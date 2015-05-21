@@ -1,5 +1,6 @@
-PATH
-  remote: /Users/calonso/dev/rails-push-notifications
+GIT
+  remote: git://github.com/calonso/rails-push-notifications.git
+  revision: 59e9830da0f775e5f317b834348ecb26c8287b9d
   specs:
     rails-push-notifications (0.2.0)
       rails (~> 4.1)
@@ -161,7 +162,7 @@ DEPENDENCIES
   jquery-rails
   pg
   rails (= 4.2.1)
-  rails-push-notifications!
+  rails-push-notifications (~> 0.2)!
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   spring
